@@ -1,0 +1,17 @@
+<%= form_with(model: tipo_espacio) do |form| %>
+  <% if tipo_espacio.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(tipo_espacio.errors.count, "error") %> prohibited this tipo_espacio from being saved:</h2>
+
+      <ul>
+        <% tipo_espacio.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,2 @@
+class TipoEspacio < ApplicationRecord
+end

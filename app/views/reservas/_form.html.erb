@@ -1,0 +1,37 @@
+<%= form_with(model: reserva) do |form| %>
+  <% if reserva.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(reserva.errors.count, "error") %> prohibited this reserva from being saved:</h2>
+
+      <ul>
+        <% reserva.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+      
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= form.label :id_tipo_reserva, "Selecciona el tipo de Reserva" %>
+  <%= form.select :id_tipo_reserva, options_for_select(@tipo_reservas), :class => 'idTipoReserva'%>
+  <br>
+  <br>
+  <%= form.label :id_tipo_reserva, "Selecciona la fecha de inicio" %>
+  <%= form.datetime_local_field :desde %>
+  <br>
+  <br>
+  <%= form.label :hasta, "Selecciona la fecha y hora de finalizacion" %>
+  <%= form.datetime_local_field :hasta %>
+  <br>
+  <br>
+  
+  <br>
+  <br>
+
+
+  <%# options_for_select(container, selected = nil) %>
+  <%# <%['display','value',:class => 'option_class']%> 
+  <div class="actions">
+    <br>
+    <%= form.submit %>
+  </div>
+<% end %>

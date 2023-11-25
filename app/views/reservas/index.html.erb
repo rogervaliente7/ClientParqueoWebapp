@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Reservas</h1>
+
+<table border="1">
+  <thead>
+    <tr>
+      <th>Id Reserva</th>
+      <th>Tipo</th>
+      <th>Espacio</th>
+      <th>Observaciones</th>
+      <th>Reservado desde</th>
+      <th>Reservado hasta</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    
+    <% @reservas.each do |reserva, txtsalida = "Espacio: "| %>
+      
+      <tr>
+        <td><%= reserva["idReserva"] %></td>
+        <td><%= reserva["idTipoReserva"]["nombre"] %></td>
+        <td><%= txtsalida + reserva["idEspacio"]["nombre"] + ", Area: " + reserva["idEspacio"]["idArea"]["nombre"] + "/" +reserva["idEspacio"]["idArea"]["idAreaPadre"]["nombre"] %></td>
+        <td><%= reserva["observaciones"] %></td>
+       <td><%= l reserva["desde"].to_date, format: :short_with_time %></td>
+       <td><%= l reserva["hasta"].to_date, format: :short_with_time %></td>
+        <td><%= link_to 'Destroy', reserva, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Reserva', new_reserva_path %>
