@@ -23,9 +23,29 @@
   <%= form.datetime_local_field :hasta %>
   <br>
   <br>
-  
-  <br>
-  <br>
+  <%= form.label :id_area_padre, "Selecciona el Area" %>
+  <%#= form.select :id_area_padre, options_for_select(@area_padre), :class => 'id_area_padre'%>
+  <%#= form.grouped_collection_select :id_area_padre, options_for_select(@area_padre), :class => 'id_area_padre', :id_area, options_for_select(@area_hija), :class => 'id_area' %>
+
+
+
+
+  <div class="form-group mb-2">
+                            <select class="form-control-outline-dark" id="areas" name="areas">
+                                <% @area_request.each do |area|%>
+                                    <% if area.try('[]', :idAreaPadre) && area.try('[]', :idAreaPadre).try(:size).try(:positive?) %>
+                                        <optgroup label="<%= area[:idAreaPadre]%>">
+                                            <% area.each do |areapadre|%>
+                                                <option value="<%= areapadre[:nombre]%>"> <%#= children["nombre"] %> </option>        
+                                            <% endt %>
+                                        </optgroup>
+                                    <% else%>
+                                         <option value="<%= area[:idArea]%>"> <%= area[:nombre] %> </option> 
+                                    <% end %>
+                                <% end %>
+                            </select>
+                        </div>
+
 
 
   <%# options_for_select(container, selected = nil) %>

@@ -1,0 +1,46 @@
+[
+        {
+            "descripcion": "sombreada",
+            "idArea": 1,
+            "nombre": "Sombra 1",
+            "children": [
+                {
+                    "descripcion": "sombreada",
+                    "idArea": 2,
+                    "nombre": "Sombra"
+                },
+                {
+                    "descripcion": "sombreada",
+                    "idArea": 3,
+                    "nombre": "Sombra"
+                }
+            ]
+        },
+        {
+            "descripcion": "sombreada",
+            "idArea": 8,
+            "nombre": "Sombra 2"
+        },
+        {
+            "descripcion": "sombreada",
+            "idArea": 4,
+            "nombre": "Sombra 3",
+            "children": [
+                {
+                    "descripcion": "sombreada",
+                    "idArea": 5,
+                    "nombre": "Sombra"
+                },
+                {
+                    "descripcion": "sombreada",
+                    "idArea": 6,
+                    "nombre": "Sombra"
+                },
+                {
+                    "descripcion": "sombreada",
+                    "idArea": 7,
+                    "nombre": "Sombra"
+                }
+            ]
+        }
+      ]

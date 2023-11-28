@@ -18,6 +18,58 @@ class ReservasController < ApplicationController
     @reservas = JSON.parse(reservas_request.body).map {|c| [ c['desde'], c['hasta'], c['idReserva'], c['observaciones']] }
     tipo_reservas_request = HTTParty.get 'http://localhost:8080/ParqueoWebapp-Parcial3/resources/tipo_reserva'
     @tipo_reservas = JSON.parse(tipo_reservas_request.body).map {|c| [ c['nombre'], c['idTipoReserva'] ] }
+    @area_request = HTTParty.get 'http://localhost:8080/ParqueoWebapp-Parcial3/resources/area'
+    @area_padre = JSON.parse(@area_request.body).map {|c| [ c['idAreaPadre'], c['nombre'] ] }
+    @area_hija = JSON.parse(@area_request.body).map {|c| [ c['idArea'], c['nombre'] ] }
+    @areas = [
+      {
+          "descripcion": "sombreada",
+          "idArea": 1,
+          "nombre": "Sombra 1",
+          "children": [
+              {
+                  "descripcion": "sombreada",
+                  "idArea": 2,
+                  "nombre": "Sombra"
+              },
+              {
+                  "descripcion": "sombreada",
+                  "idArea": 3,
+                  "nombre": "Sombra"
+              }
+          ]
+      },
+      {
+          "descripcion": "sombreada",
+          "idArea": 8,
+          "nombre": "Sombra 2"
+      },
+      {
+          "descripcion": "sombreada",
+          "idArea": 4,
+          "nombre": "Sombra 3",
+          "children": [
+              {
+                  "descripcion": "sombreada",
+                  "idArea": 5,
+                  "nombre": "Sombra"
+              },
+              {
+                  "descripcion": "sombreada",
+                  "idArea": 6,
+                  "nombre": "Sombra"
+              },
+              {
+                  "descripcion": "sombreada",
+                  "idArea": 7,
+                  "nombre": "Sombra"
+              }
+          ]
+      }
+    ]
+
+
+
     @reserva = Reserva.new
 
   end

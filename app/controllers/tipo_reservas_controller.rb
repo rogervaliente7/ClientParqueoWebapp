@@ -23,15 +23,20 @@ class TipoReservasController < ApplicationController
 
   # POST /tipo_reservas or /tipo_reservas.json
   def create
-    tipo_reserva_url = HTTParty.get 'http://localhost:8080/ParqueoWebapp-Parcial3/resources/tipo_reserva'
     @tipo_reserva = TipoReserva.new(tipo_reserva_params)
 
-    result = HTTParty.post('http://localhost:8080/ParqueoWebapp-Parcial3/resources/tipo_reserva'.to_str, 
-      :body => tipo_reserva_params.to_json,
+    # result = RestClient::Request.execute(method: :post, url: 'http://localhost:8080/ParqueoWebapp-Parcial3/resources/tipo_reserva',
+    #   payload: JSON.parse(params[:tipo_reserva].to_json), headers: {'Content-Type' => 'application/json'})
+
+    # result = RestClient.post( 'http://localhost:8080/ParqueoWebapp-Parcial3/resources/tipo_reserva', JSON.parse(params[:tipo_reserva].to_json),{content_type: :json, accept: :json})
+     
+
+    result = HTTParty.post('http://localhost:8080/ParqueoWebapp-Parcial3/resources/tipo_reserva', 
+      :body => JSON.parse(params[:tipo_reserva].to_json).to_json,
       :headers => { 'Content-Type' => 'application/json' })
 
     respond_to do |format|
-      if @tipo_reserva.save
+      if result.response.code == '201'
         format.html { redirect_to tipo_reserva_url(@tipo_reserva), notice: "Tipo reserva was successfully created." }
         format.json { render :show, status: :created, location: @tipo_reserva }
       else

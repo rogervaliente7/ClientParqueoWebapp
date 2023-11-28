@@ -10,7 +10,16 @@
       </ul>
     </div>
   <% end %>
-
+  
+  <div>
+    <%= form.label :id_tipo_espacio%>
+    <%= form.number_field :id_tipo_espacio, in: 1..10000000%>
+  </div>
+  <div>
+    <%= form.label :nombre%>
+    <%= form.text_field :nombre%>
+  </div>
+  <br>
   <div class="actions">
     <%= form.submit %>
   </div>

@@ -4,7 +4,7 @@ class TipoEspaciosController < ApplicationController
   # GET /tipo_espacios or /tipo_espacios.json
   def index
     # @tipo_espacios = TipoEspacio.all
-    @tipo_espacios = HTTParty.get 'http://localhost:8080/ParqueoWebapp/resources/tipo_espacio'
+    @tipo_espacios = HTTParty.get 'http://localhost:8080/ParqueoWebapp-Parcial3/resources/tipo_espacio'
   end
 
   # GET /tipo_espacios/1 or /tipo_espacios/1.json
@@ -13,6 +13,7 @@ class TipoEspaciosController < ApplicationController
 
   # GET /tipo_espacios/new
   def new
+    @tipo_espacio = HTTParty.get 'http://localhost:8080/ParqueoWebapp-Parcial3/resources/tipo_espacio'
     @tipo_espacio = TipoEspacio.new
   end
 
@@ -24,8 +25,12 @@ class TipoEspaciosController < ApplicationController
   def create
     @tipo_espacio = TipoEspacio.new(tipo_espacio_params)
 
+    result = HTTParty.post('http://localhost:8080/ParqueoWebapp-Parcial3/resources/tipo_espacio', 
+      :body => JSON.parse(params[:tipo_espacio].to_json).to_json,
+      :headers => { 'Content-Type' => 'application/json' })
+s
     respond_to do |format|
-      if @tipo_espacio.save
+      if result.response.code == '201'
         format.html { redirect_to tipo_espacio_url(@tipo_espacio), notice: "Tipo espacio was successfully created." }
         format.json { render :show, status: :created, location: @tipo_espacio }
       else
@@ -66,6 +71,7 @@ class TipoEspaciosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def tipo_espacio_params
-      params.fetch(:tipo_espacio, {})
+      # params.fetch(:tipo_espacio, {})
+      params.require(:tipo_espacio).permit(:id_tipo_espacio, :nombre)
     end
 end

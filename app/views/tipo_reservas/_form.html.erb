@@ -10,10 +10,7 @@
       </ul>
     </div>
   <% end %>
-  <%= form.label :id_tipo_reserva%>
-  <%= form.number_field :id_tipo_reserva%>
-  <br>
-  <br>
+
   <%= form.label :nombre%>
   <%= form.text_field :nombre%>
   <br>
@@ -23,7 +20,7 @@
   <br>
   <br>
   <%= form.label :publico%>
-  <%= form.check_box :publico%>
+  <%= form.check_box :publico, {}, true, false%>
   <br>
   <br>
   <div class="actions">
